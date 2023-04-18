@@ -1,0 +1,199 @@
+<html>
+<head>
+	<title>List of Users</title>
+	<script type="text/javascript">
+		var users = [			
+			{		
+			"firstName": "Saumya","middleName": "Kumar","lastName": "Mittal", "email": "saumya.kumar@gmail.com",	"phone": "935-230-5672",
+				"role": "Tester",
+				"address": "Raja Park"	
+			},
+			{
+		    "firstName": "Mohit","middleName": "Doe",	"lastName": "Sharma","email": "mohit.doe@example.com","phone": "975-230-5671",
+				"role": "Manager",
+				"address": "Pink Square" 
+		     },		
+			{
+			"firstName": "Ayushi","middleName": "Kumari","lastName": "Goyal","email": "ayushi.kumari@example.com","phone": "989-555-9012",
+				"role": "Developer",
+				"address": "Ajmeri Gate"
+		     }	
+				];
+
+		function loadData() {
+			var table = document.getElementById("userTable");
+
+			for (var i = 0; i < users.length; i++) {
+				var user = users[i];
+				var row = table.insertRow(i+1);
+				var firstNameCell = row.insertCell(0);
+				var middleNameCell = row.insertCell(1);
+				var lastNameCell = row.insertCell(2);
+				var emailCell = row.insertCell(3);
+				var phoneCell = row.insertCell(4);
+				var roleCell = row.insertCell(5);
+				var addressCell = row.insertCell(6);
+
+				var editButtonCell = row.insertCell(7);
+				var deleteButtonCell = row.insertCell(8);
+
+				firstNameCell.innerHTML = user.firstName;
+				middleNameCell.innerHTML = user.middleName;
+				lastNameCell.innerHTML = user.lastName;
+				emailCell.innerHTML = user.email;
+				phoneCell.innerHTML = user.phone;
+				roleCell.innerHTML = user.role;
+				addressCell.innerHTML = user.address;
+				editButtonCell.innerHTML = '<button onclick="editRow(this)">Edit</button>';
+				deleteButtonCell.innerHTML = '<button onclick="deleteRow(this)">Delete</button>';
+			}
+
+			document.getElementById("loadDataButton").style.display = "none";
+			document.getElementById("refreshDataButton").style.display = "inline-block";
+		}
+
+		function refreshData() {
+			location.reload();
+		}
+
+		function editRow(button) {
+			var row = button.parentNode.parentNode;
+			var firstNameCell = row.cells[0];
+			var middleNameCell = row.cells[1];
+			var lastNameCell = row.cells[2];
+			var emailCell = row.cells[3];
+			var phoneCell = row.cells[4];
+			var roleCell = row.cells[5];
+			var addressCell = row.cells[6];
+			var editButtonCell = row.cells[7];
+			var deleteButtonCell = row.cells[8];
+
+			editButtonCell.innerHTML = '<button onclick="saveRow(this)">Save</button> <button onclick="cancelEditRow(this)">Cancel</button>';
+
+			var firstName = firstNameCell.innerHTML;
+			firstNameCell.innerHTML = '<input type="text" value="' + firstName + '">';
+
+			var middleName = middleNameCell.innerHTML;
+			middleNameCell.innerHTML = '<input type="text" value="' + middleName + '">';
+
+			var lastName = lastNameCell.innerHTML;
+			lastNameCell.innerHTML = '<input type="text" value="' + lastName + '">';
+
+			var email = emailCell.innerHTML;
+			emailCell.innerHTML = '<input type="text" value="' + email + '">';
+
+			var phone = phoneCell.innerHTML;
+			phoneCell.innerHTML = '<input type="text" value="' + phone + '">';
+
+			var role = roleCell.innerHTML;
+			roleCell.innerHTML = '<input type="text" value="' + role + '">';
+			
+			var address = addressCell.innerHTML;
+			addressCell.innerHTML = '<input type="text" value="' + address + '">';
+		}
+
+		function saveRow(button) {
+			var row = button.parentNode.parentNode;
+			var firstNameCell = row.cells[0];
+			var middleNameCell = row.cells[1];
+			var lastNameCell = row.cells[2];
+			var emailCell = row.cells[3];
+			var phoneCell = row.cells[4];
+			var roleCell = row.cells[5];
+			var addressCell = row.cells[6];
+			var editButtonCell = row.cells[7];
+			var deleteButtonCell = row.cells[8];
+
+			var firstName = firstNameCell.querySelector('input').value;
+			firstNameCell.innerHTML = firstName;
+
+			var middleName = middleNameCell.querySelector('input').value;
+			middleNameCell.innerHTML = middleName;
+
+			var lastName = lastNameCell.querySelector('input').value;
+			lastNameCell.innerHTML = lastName;
+
+			var email = emailCell.querySelector('input').value;
+			emailCell.innerHTML = email;
+
+			var phone = phoneCell.querySelector('input').value;
+			phoneCell.innerHTML = phone;
+
+			var role = roleCell.querySelector('input').value;
+			roleCell.innerHTML = role;
+
+			var address = addressCell.querySelector('input').value;
+			addressCell.innerHTML = address;
+
+			
+
+			editButtonCell.innerHTML = '<button onclick="editRow(this)">Edit</button>';
+
+			alert("Changes saved successfully.");
+		}
+
+		function cancelEditRow(button) {
+			var row = button.parentNode.parentNode;
+			var firstNameCell = row.cells[0];
+			var middleNameCell= row.cells[1];
+           var lastNameCell = row.cells[2];
+		   var emailCell = row.cells[3];
+		  var phoneCell = row.cells[4];
+			var roleCell = row.cells[5];
+			var addressCell = row.cells[6];
+
+var editButtonCell = row.cells[7];
+var deleteButtonCell = row.cells[8];		
+
+var firstName = firstNameCell.querySelector('input').getAttribute('value');
+		firstNameCell.innerHTML = firstName;
+
+		var middleName = middleNameCell.querySelector('input').getAttribute('value');
+		middleNameCell.innerHTML = middleName;
+
+		var lastName = lastNameCell.querySelector('input').getAttribute('value');
+		lastNameCell.innerHTML = lastName;
+
+		var email = emailCell.querySelector('input').getAttribute('value');
+		emailCell.innerHTML = email;
+
+		var phone = phoneCell.querySelector('input').getAttribute('value');
+		phoneCell.innerHTML = phone;
+
+		var roll = rollCell.querySelector('input').getAttribute('value');
+		rollCell.innerHTML = roll;
+
+		var address = addressCell.querySelector('input').getAttribute('value');
+		addressCell.innerHTML = address;
+
+		editButtonCell.innerHTML = '<button onclick="editRow(this)">Edit</button>';
+
+		alert("Changes discarded.");
+	}
+
+	function deleteRow(button) {
+		var row = button.parentNode.parentNode;
+		row.parentNode.removeChild(row);
+	}
+</script>
+</head>
+<body>
+	<button id="loadDataButton" onclick="loadData()">Load data</button>
+	<button id="refreshDataButton" style="display:none;" onclick="refreshData()">Refresh data</button>
+	<table id="userTable">
+		<thead>
+			<tr>
+				<th>First Name</th>
+				<th>Middle Name</th>
+				<th>Last Name</th>
+				<th>email</th>
+				<th>phone</th>
+				<th>role</th>
+				<th>address</th>
+				<th>Edit/Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	
